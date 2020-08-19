@@ -33,6 +33,6 @@ public class CustomerEntity extends AbstractEntity<Customer> {
     }
 
     public static CustomerEntity toEntity(final Customer customer) {
-        return new CustomerEntity(UUID.randomUUID(), customer.getName(), customer.isActive(), AddressEntity.toEntity(customer.getAddress()));
+        return new CustomerEntity(customer.getId(), customer.getName(), customer.isActive(), AddressEntity.toEntity(customer.getAddress()));
     }
 }

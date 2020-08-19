@@ -33,6 +33,6 @@ public class AddressEntity extends AbstractEntity<Address> {
 
 
     public static AddressEntity toEntity(final Address address) {
-        return new AddressEntity(UUID.randomUUID(), address.getCep(), address.getStreet());
+        return new AddressEntity(address.getId(), address.getCep(), address.getStreet());
     }
 }
