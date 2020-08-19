@@ -11,31 +11,22 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CustomerDTO extends AbstractDTO<Customer> {
 
+    private UUID id;
+
     @NotBlank
     private String name;
 
     private AddressDTO address;
 
-    private String cep;
-
-    public CustomerDTO(String name, String cep) {
-        this.name = name;
-        this.cep = cep;
-    }
-
-    public CustomerDTO(UUID id, String name) {
-        super(id);
-        this.name = name;
-    }
-
     public CustomerDTO(UUID id, String name, AddressDTO addressDTO) {
-        this(id, name);
+        this.id = id;
+        this.name = name;
         this.address = addressDTO;
     }
 
     @Override
     public Customer toDomain() {
-        return new Customer(UUID.randomUUID(), this.name);
+        return new Customer(this.id, false, this.name, this.address.toDomain());
     }
 
     public static CustomerDTO toDto(final Customer customer) {

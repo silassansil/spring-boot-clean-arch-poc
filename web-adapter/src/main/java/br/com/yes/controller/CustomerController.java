@@ -2,6 +2,7 @@ package br.com.yes.controller;
 
 import br.com.yes.annotation.WebAdapter;
 import br.com.yes.controller.dto.CustomerDTO;
+import br.com.yes.controller.dto.CustomerNameAndCepDTO;
 import br.com.yes.domain.Customer;
 import br.com.yes.usecase.address.FindAddressByCepUseCase;
 import br.com.yes.usecase.customer.FindAllCustomerUserCase;
@@ -22,16 +23,16 @@ import static java.util.stream.Collectors.toList;
 @WebAdapter
 @RequiredArgsConstructor
 @RequestMapping("/customers")
-public class CustomerControllerImpl {
+public class CustomerController {
 
     private final SaveCustomerUseCase saveCustomerUseCase;
     private final FindAddressByCepUseCase findAddressByCepUseCase;
     private final FindAllCustomerUserCase findAllCustomerUserCase;
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> save(@Valid @RequestBody CustomerDTO resource) {
+    public ResponseEntity<CustomerDTO> save(@Valid @RequestBody CustomerNameAndCepDTO resource) {
         final var address = this.findAddressByCepUseCase.doExecute(resource.getCep());
-        final var customer = this.saveCustomerUseCase.doExecute(new Customer(resource.toDomain(), address));
+        final var customer = this.saveCustomerUseCase.doExecute(new Customer(resource.getName(), address));
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(CustomerDTO.toDto(customer));

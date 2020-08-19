@@ -8,8 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.UUID;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -37,6 +35,13 @@ public class AddressIntegration {
 
 
     public Address toDomain() {
-        return new Address(UUID.randomUUID(), this.cep, this.street, this.complement, this.neighborhood, this.location, this.uf);
+        return Address.builder()
+                .cep(this.cep)
+                .street(this.street)
+                .complement(this.complement)
+                .neighborhood(this.neighborhood)
+                .location(this.location)
+                .uf(this.uf)
+                .build();
     }
 }

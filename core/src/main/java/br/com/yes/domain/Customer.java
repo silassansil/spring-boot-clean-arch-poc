@@ -1,27 +1,23 @@
 package br.com.yes.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
+@AllArgsConstructor
 public class Customer implements Serializable {
-    private final UUID id;
+
+    private UUID id;
+    private boolean active;
+
     private final String name;
-    private Boolean active;
-    private Address address;
+    private final Address address;
 
-    public Customer(UUID id, String name) {
-        this.id = id;
+    public Customer(String name, Address address) {
         this.name = name;
-        this.active = Boolean.FALSE;
-    }
-
-    public Customer(Customer customer, Address address) {
-        this.id = customer.getId();
-        this.name = customer.getName();
-        this.active = customer.getActive();
         this.address = address;
     }
 

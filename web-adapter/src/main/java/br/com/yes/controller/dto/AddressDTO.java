@@ -3,23 +3,20 @@ package br.com.yes.controller.dto;
 import br.com.yes.domain.Address;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.UUID;
 
 @Getter
+@Builder
+@AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddressDTO extends AbstractDTO<Address> {
 
-    public AddressDTO(UUID id, String cep, String street, String complement, String neighborhood, String location, String uf) {
-        super(id);
-        this.cep = cep;
-        this.street = street;
-        this.complement = complement;
-        this.neighborhood = neighborhood;
-        this.location = location;
-        this.uf = uf;
-    }
+    @JsonProperty("id")
+    private final UUID id;
 
     @JsonProperty("cep")
     private final String cep;
@@ -42,12 +39,26 @@ public class AddressDTO extends AbstractDTO<Address> {
 
     @Override
     public Address toDomain() {
-        return new Address(super.getId(), this.cep, this.street, this.complement, this.neighborhood, this.location, this.uf);
+        return Address.builder()
+                .id(this.id)
+                .cep(this.cep)
+                .street(this.street)
+                .complement(this.complement)
+                .neighborhood(this.neighborhood)
+                .location(this.location)
+                .uf(this.uf)
+                .build();
     }
 
     public static AddressDTO toDto(final Address address) {
-        return new AddressDTO(
-                address.getId(), address.getCep(), address.getStreet(), address.getComplement(), address.getNeighborhood(), address.getLocation(), address.getUf()
-        );
+        return AddressDTO.builder()
+                .id(address.getId())
+                .cep(address.getCep())
+                .street(address.getStreet())
+                .complement(address.getComplement())
+                .neighborhood(address.getNeighborhood())
+                .location(address.getLocation())
+                .uf(address.getUf())
+                .build();
     }
 }
