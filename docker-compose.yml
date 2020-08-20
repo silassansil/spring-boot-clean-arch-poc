@@ -1,0 +1,7 @@
+version: '3'
+services:
+  spring-boot-clean-arch-multi-module-poc:
+    build: ./
+    container_name: spring-boot-clean-arch-multi-module-poc
+    ports:
+      - "8080:8080"
