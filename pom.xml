@@ -9,7 +9,7 @@
         <module>web-adapter</module>
         <module>integration-adapter</module>
         <module>persistence-adapter</module>
-        <module>configuration</module>
+        <module>interactor</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
