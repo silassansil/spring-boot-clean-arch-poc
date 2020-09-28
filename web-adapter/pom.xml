@@ -19,7 +19,7 @@
 
         <dependency>
             <groupId>br.com.yes</groupId>
-            <artifactId>application</artifactId>
+            <artifactId>interactor</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
